@@ -78,8 +78,9 @@ export default function Dashboard() {
         },
       });
       setCampaigns(response.data || []);
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to load campaigns');
+    } catch (err) {
+      const error = err as { response?: { data?: { error?: string } } };
+      setError(error.response?.data?.error || 'Failed to load campaigns');
       setIsApiKeySet(false);
     } finally {
       setLoading(false);
@@ -109,8 +110,9 @@ export default function Dashboard() {
       
       const data = response.data || [];
       setStats(data);
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to load campaign statistics');
+    } catch (err) {
+      const error = err as { response?: { data?: { error?: string } } };
+      setError(error.response?.data?.error || 'Failed to load campaign statistics');
       setStats([]);
     } finally {
       setLoading(false);
